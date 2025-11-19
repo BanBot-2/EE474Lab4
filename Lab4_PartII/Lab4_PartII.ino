@@ -5,7 +5,7 @@
  * @brief Uses the dual-core architecture of the ESP32 to capture and process real-time sensor data.
  *        Synchronizes tasks using binary semaphores.
  *
- * @version 1.0
+ * @version 2.0
  * @details
  * ### Update History
  * - **2025-11-11** (Update 2): Tweaked task code and stack size.
@@ -146,14 +146,14 @@ bool isPrime(int num) {
  * @param args Unused task parameter.
  */
 void vTaskPrime(void *args) {
-  for (int i = 2; i <= 5000; i++) {
-    if (isPrime(i)) {
-      Serial.print("Prime: ");
-      Serial.println(i);
+  while (true) {
+    for (int i = 2; i <= 5000; i++) {
+      if (isPrime(i)) {
+        Serial.print("Prime: ");
+        Serial.println(i);
+      }
     }
-    vTaskDelay(pdMS_TO_TICKS(10));
   }
-  vTaskDelete(NULL);
 }
 
 // ============================================ Setup =============================================
